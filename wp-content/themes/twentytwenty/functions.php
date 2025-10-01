@@ -841,3 +841,59 @@ function twentytwenty_get_elements_array() {
 	 */
 	return apply_filters( 'twentytwenty_get_elements_array', $elements );
 }
+
+// // Nạp Bootstrap 4, FontAwesome và file CSS footer custom
+// function my_custom_assets() {
+// 	// Bootstrap CSS (CDN)
+// 	wp_enqueue_style(
+// 		'bootstrap-css',
+// 		'https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+// 		array(),
+// 		'4.0.0'
+// 	);
+
+// 	// Font Awesome 4.7
+// 	wp_enqueue_style(
+// 		'fontawesome-4',
+// 		'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
+// 		array(),
+// 		'4.7.0'
+// 	);
+
+// 	// CSS footer custom (footer.css phải nằm cùng thư mục với style.css trong theme)
+// 	wp_enqueue_style(
+// 		'my-footer-style',
+// 		get_stylesheet_directory_uri() . '/style.css',
+// 		array(), // load sau style.css chính
+// 		filemtime( get_stylesheet_directory() . '/style.css' )
+// 	);
+
+// 	// Bootstrap JS (cần jQuery)
+// 	wp_enqueue_script(
+// 		'bootstrap-js',
+// 		'https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',
+// 		array('jquery'),
+// 		'4.0.0',
+// 		true
+// 	);
+// }
+// add_action( 'wp_enqueue_scripts', 'my_custom_assets', 20 );
+
+function mytheme_enqueue_styles() {
+    // Nếu muốn dùng bản cũ (4.7.0)
+    wp_enqueue_style(
+        'font-awesome',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
+        array(),
+        '4.7.0'
+    );
+
+    // Nếu muốn bản mới hơn (6.x)
+    // wp_enqueue_style(
+    //     'font-awesome',
+    //     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css',
+    //     array(),
+    //     '6.5.2'
+    // );
+}
+add_action('wp_enqueue_scripts', 'mytheme_enqueue_styles');
