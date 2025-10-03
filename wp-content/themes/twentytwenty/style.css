@@ -1407,7 +1407,7 @@ body:not(.enable-search-modal) .header-titles-wrapper {
 
 .site-title a:hover,
 .site-title a:focus {
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 .site-description {
@@ -7043,4 +7043,69 @@ footer {
     font-size: 20px !important;  /* chỉnh nhỏ lại */
     font-weight: 600 !important;
     margin-bottom: 15px;
+}
+
+/* 3/10 chỉnh sửa bài viết  */
+.tdc-list-item-spacing {
+    /* Đẩy toàn bộ khối tin tức sang phải 20px (tạo khoảng cách với viền trái) */
+    padding-left: 20px !important; 
+}
+.tdc-news-wrapper {
+    display: flex; /* Dùng Flexbox để xếp 3 thành phần ngang hàng */
+    align-items: flex-start; /* Căn trên đầu */
+    padding: 20px 0; /* Khoảng cách trên dưới cho mỗi tin */
+    border-bottom: 1px solid #eee; /* Đường kẻ ngang phân cách các tin */
+}
+
+.tdc-date-col {
+    flex-shrink: 0; /* Không cho cột ngày bị co lại */
+    width: 80px; /* Chiều rộng cố định cho ngày tháng */
+    text-align: center;
+}
+
+.tdc-vertical-divider {
+    /* Tạo dấu sọc đứng | */
+    width: 2px;
+    height: auto; 
+    min-height: 80px; /* Chiều cao tối thiểu của sọc */
+    background-color: #4e4d4d; /* Màu sắc của sọc */
+    margin-right: 15px; /* Khoảng cách giữa sọc và nội dung */
+}
+
+.tdc-content-col {
+    /* Cột nội dung chiếm phần còn lại */
+    flex-grow: 1;
+    /* Đẩy nội dung ra xa sọc đứng | */
+    padding-left: 15px; 
+}
+
+.tdc-news-title a {
+    color: #007bff; /* Màu xanh cho tiêu đề */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* bài viết giao diện expect */
+/* Giới hạn chiều rộng cho khu vực nội dung */
+.tdc-content-col {
+    /* Đảm bảo cột nội dung chiếm phần còn lại */
+    flex-grow: 1;
+    padding-left: 15px; 
+    
+    /* Thêm Max-width cho chính cột nội dung để nó không bị quá rộng */
+    /* Điều chỉnh giá trị 600px này theo ý bạn (tùy thuộc vào kích thước màn hình) */
+    max-width: 600px; 
+}
+
+/* Hoặc giới hạn riêng cho đoạn trích dẫn */
+.tdc-news-excerpt {
+    /* Đặt chiều rộng tối đa cho đoạn trích (ví dụ: 80% chiều rộng của cột chứa nó) */
+    max-width: 80%; 
+    
+    /* Hoặc đặt chiều rộng tối đa bằng pixel */
+    /* max-width: 450px; */ 
+    
+    /* Đảm bảo văn bản xuống dòng tự động */
+    word-wrap: break-word;
 }
