@@ -7272,3 +7272,172 @@ footer {
 .account-icon-dropdown>.account-toggle>.account-icon-wrap>.account-text{
 	color: #8383839f !important;
 }
+.header-footer-group table caption, body:not(.overlay-header) .header-inner .toggle-wrapper::before{
+	background: none !important;
+}
+
+/* ==== GIAO DIỆN TRANG TÌM KIẾM KHÔNG CÓ KẾT QUẢ ==== */
+
+/* Header */
+.archive-header {
+  background-color: #fff !important;
+  text-align: center;
+  padding: 40px 20px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.archive-header .archive-title {
+  color: #d6336c; /* màu đỏ hồng */
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* Riêng phần "Tìm kiếm:" trong <span> có màu đen */
+.archive-header .archive-title .color-accent {
+  color: #000;
+}
+
+.archive-subtitle p {
+  color: #555;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Nền của phần form */
+.no-search-results-form {
+  background-color: #f9f3e8;
+  padding: 40px 0;
+  text-align: center;
+}
+
+/* --- Form tìm kiếm không có kết quả --- */
+.no-search-results-form {
+  text-align: center;
+  padding: 40px 0;
+}
+
+/* Form */
+.no-search-results-form .search-form {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Ô input */
+.no-search-results-form .search-field {
+  width: 100%;
+  padding: 10px 110px 10px 40px; /* chừa khoảng trống trái cho icon và phải cho nút */
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Icon 🔍 trong ô input (fix gạch ngang, ép màu đen) */
+div.no-search-results-form form.search-form::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  background: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path stroke='black' stroke-width='2' fill='black' d='M21.53 20.47l-4.69-4.69a7.5 7.5 0 10-1.06 1.06l4.69 4.69a.75.75 0 001.06-1.06zM10.5 17a6.5 6.5 0 110-13 6.5 6.5 0 010 13z'/></svg>") 
+              no-repeat center center;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 5;
+}
+
+
+/* Nút "Tìm kiếm" màu xanh */
+.no-search-results-form .search-submit {
+  position: absolute;
+  right: 8px;
+  top: 41%;
+  transform: translateY(-50%);
+  background-color: #28a745; /* xanh lá */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover nút xanh */
+.no-search-results-form .search-submit:hover {
+  background-color: #218838;
+}
+
+/* Ẩn label đọc màn hình */
+.no-search-results-form .screen-reader-text {
+  display: none;
+}
+
+
+/* Form tìm kiếm */
+/* .search-form {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+} */
+
+/* Ô input */
+/* .search-form .search-field {
+  width: 100%;
+  padding: 10px 110px 10px 40px; chừa chỗ cho icon
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: #fff;
+} */
+/* 🔍 */
+/* Icon kính lúp trong ô input */
+/* .search-form::before {
+  content: "\1F50D";            
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #777;
+} */
+
+/* Nút Tìm kiếm */
+/* .search-form .search-submit {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #28a745; xanh lá
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+} */
+
+/* .search-form .search-submit:hover {
+  background-color: #218838;
+} */
+
+/* Ẩn text cho screen reader */
+/* .search-form label .screen-reader-text {
+  display: none;
+} */
+
