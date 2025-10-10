@@ -7424,61 +7424,138 @@ div.no-search-results-form form.search-form::before {
 }
 
 
-/* Form tìm kiếm */
-/* .search-form {
-  display: inline-block;
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-} */
+/* 10/10/2025  hiển thị bài viết tìm kiếm */
+.search-results-container {
+    width: 85%;
+    margin: 40px auto;
+}
 
-/* Ô input */
-/* .search-form .search-field {
-  width: 100%;
-  padding: 10px 110px 10px 40px; chừa chỗ cho icon
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
-  outline: none;
-  color: #333;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  background-color: #fff;
-} */
-/* 🔍 */
-/* Icon kính lúp trong ô input */
-/* .search-form::before {
-  content: "\1F50D";            
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-  color: #777;
-} */
+.search-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    /* padding: 10px; */
+}
 
-/* Nút Tìm kiếm */
-/* .search-form .search-submit {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #28a745; xanh lá
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-} */
+.search-thumb img {
+    width: 200px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 8px;
+}
 
-/* .search-form .search-submit:hover {
-  background-color: #218838;
-} */
+.search-date {
+    text-align: center;
+    margin: 0 25px;
+    border-right: 2px solid #ccc;
+    padding-right: 15px;
+}
 
-/* Ẩn text cho screen reader */
-/* .search-form label .screen-reader-text {
-  display: none;
-} */
+.search-date .day {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.search-date .month {
+    color: #888;
+    font-size: 14px;
+}
+
+.search-info .title a {
+    color: #0073aa;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.search-info .title a:hover {
+    text-decoration: underline;
+}
+
+.search-info p {
+    margin-top: 5px;
+    color: #444;
+}
+/* css 2 */
+/* ==== Kết quả tìm kiếm dạng thẻ ngang ==== */
+.search-card {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.search-thumb {
+    flex: 0 0 250px;
+}
+
+.search-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.search-content {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.search-date {
+    text-align: center;
+    margin-right: 20px;
+    border-right: 2px solid #ddd;
+    padding-right: 20px;
+}
+
+.search-date .day {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.search-date .month {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #888;
+}
+
+.search-text {
+    flex: 1;
+}
+
+.search-title a {
+    color: #0073aa;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.search-title a:hover {
+    color: #005177;
+}
+
+.search-excerpt {
+    color: #555;
+    margin-top: 8px;
+    font-size: 14px;
+}
+/* khung nhỏ gọn */
+.search-results-container {
+    /* max-width: 900px; */
+    margin: 0 auto;
+}
+
+/* hover */
+.search-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.2s;
+}
 
