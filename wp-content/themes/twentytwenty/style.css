@@ -7501,6 +7501,109 @@ div.no-search-results-form form.search-form::before {
 
 
 /* 10/10/2025  hiển thị bài viết tìm kiếm */
+/* ========== PHẦN TÌM KIẾM (SEARCH RESULTS) ========== */
+.tdc-search-result {
+	display: flex;
+	align-items: flex-start;
+	gap: 20px;
+	padding: 24px 30px;
+	/* tăng padding ngang */
+	margin: 25px auto;
+	max-width: 1000px;
+	/* mở rộng nhẹ hơn mặc định */
+	border: 1px solid #e5e7eb;
+	border-radius: 16px;
+	background: #fff;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	transition: all 0.25s ease;
+}
+
+
+.tdc-search-result:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Cột ngày tháng */
+.tdc-search-result .tdc-date-col {
+	text-align: center;
+	min-width: 65px;
+	border-right: 2px solid #f1f1f1;
+	padding-right: 15px;
+}
+
+.tdc-search-result .date-day {
+	font-size: 2rem;
+	font-weight: 700;
+	color: #1f2937;
+	line-height: 1;
+}
+
+.tdc-search-result .date-month {
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	color: #6b7280;
+}
+
+/* Cột nội dung */
+.tdc-search-content {
+	flex: 1;
+}
+
+.tdc-search-title {
+	margin: 0;
+	font-size: 1.125rem;
+	font-weight: 600;
+}
+
+.tdc-search-title a {
+	color: #111827;
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.tdc-search-title a:hover {
+	color: #2563eb;
+}
+
+.tdc-search-excerpt {
+	margin-top: 6px;
+	color: #4b5563;
+	font-size: 0.9rem;
+}
+
+.tdc-read-more {
+	display: inline-block;
+	margin-top: 10px;
+	font-size: 0.85rem;
+	color: #2563eb;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.tdc-read-more:hover {
+	text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+	.tdc-search-result {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.tdc-search-result .tdc-date-col {
+		border: none;
+		padding-right: 0;
+		margin-bottom: 10px;
+	}
+
+	.tdc-search-title {
+		font-size: 1rem;
+	}
+}
+
+/* bản 2 có vẻ sẽ lỗi */
 .search-results-container {
 	width: 85%;
 	margin: 40px auto;
@@ -7557,7 +7660,7 @@ div.no-search-results-form form.search-form::before {
 }
 
 /* css 2 */
-/* ==== Kết quả tìm kiếm dạng thẻ ngang ==== */
+/* ==== K?t qu? tìm ki?m d?ng th? ngang ==== */
 .search-card {
 	display: flex;
 	align-items: center;
@@ -7594,12 +7697,12 @@ div.no-search-results-form form.search-form::before {
 }
 
 .search-date .day {
-	font-size: 28px;
+	font-size: 38px;
 	font-weight: bold;
 }
 
 .search-date .month {
-	font-size: 12px;
+	font-size: 30px;
 	text-transform: uppercase;
 	color: #888;
 }
@@ -7624,7 +7727,7 @@ div.no-search-results-form form.search-form::before {
 	font-size: 14px;
 }
 
-/* khung nhỏ gọn */
+/* khung nh? g?n */
 .search-results-container {
 	/* max-width: 900px; */
 	margin: 0 auto;
@@ -7637,7 +7740,8 @@ div.no-search-results-form form.search-form::before {
 	transition: 0.2s;
 }
 
-/* 10/10 chỉnh sửa lại ài viết trang chủ */
+
+/* 10/10 chỉnh sửa lại bài viết trang chủ */
 /* ===== BỐ CỤC DANH SÁCH BÀI VIẾT ===== */
 .tdc-news-wrapper {
 	display: flex;
@@ -7648,7 +7752,8 @@ div.no-search-results-form form.search-form::before {
 	margin-bottom: 20px;
 	border-radius: 4px;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-	max-width: 800px; /* ✅ Giới hạn chiều ngang */
+	max-width: 800px;
+	/* ✅ Giới hạn chiều ngang */
 }
 
 /* Cột ngày tháng */
@@ -7657,7 +7762,8 @@ div.no-search-results-form form.search-form::before {
 	text-align: center;
 	margin-right: 10px;
 	padding-top: 5px;
-	padding-top: 35px; /* ✅ Hạ thấp ngày tháng xuống */
+	padding-top: 35px;
+	/* ✅ Hạ thấp ngày tháng xuống */
 }
 
 .tdc-date-col .date-day {
@@ -7715,3 +7821,181 @@ div.no-search-results-form form.search-form::before {
 	border-bottom: 2px solid #e0e0e0;
 	padding-bottom: 20px;
 }
+
+/* 10/10 chỉnh sửa thêm đồng hồ vàng ở bài viết chi tiết   */
+.tdc-single-wrapper {
+	position: relative;
+}
+
+.tdc-date-circle {
+	position: absolute;
+	top: 5px;
+	right: 85px;
+	background: #ffdd00;
+	border-radius: 50%;
+	width: 90px;
+	height: 90px;
+	padding: 15px;
+	text-align: center;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	z-index: 10;
+}
+
+.tdc-date-circle .day {
+	font-size: 22px;
+	font-weight: bold;
+	margin-bottom: -15px;
+	margin-left: -27px;
+}
+
+.tdc-date-circle .line-year {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 2px 0;
+}
+
+.tdc-date-circle .line {
+	font-size: 14px;
+	font-weight: bold;
+	margin-right: 4px;
+}
+
+.tdc-date-circle .year {
+	font-size: 22px;
+	font-weight: bold;
+	color: #333;
+}
+
+.tdc-date-circle .month {
+	font-size: 22px;
+	font-weight: bold;
+	margin-top: -12px;
+	margin-left: -29px;
+}
+
+/* 15/10/2025 chỉnh khung tiêu đề  */
+/* ======= KHUNG CHO TIÊU ĐỀ TRONG BÀI VIẾT ======= */
+.tdc-single-title {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: none;
+	/* Xóa tất cả viền */
+	border-bottom: 2px solid #a39b9b;
+	/* Chỉ giữ viền dưới, bạn có thể đổi màu tùy ý */
+	padding-bottom: 10px;
+	/* Tạo khoảng cách giữa chữ và gạch dưới */
+	margin-bottom: 15px;
+	/* Khoảng cách giữa tiêu đề và đoạn văn */
+	border-radius: 0;
+	/* Bỏ bo góc */
+	box-shadow: none; /* Xóa bóng xung quanh nếu có */
+	padding: 40px 25px;
+	margin: 30px 0;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+	flex-wrap: wrap;
+	font-size: 22px;
+	font-weight: 700;
+	color: #111;
+}
+
+/* ===== VÒNG TRÒN NGÀY THÁNG NHỎ Ở BÊN PHẢI ===== */
+.wp-block-heading::after {
+
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+	font-size: 14px;
+	margin-left: 15px;
+}
+/* xóa gấu gạch giữa các bài viết trang chủ 15/10 */
+hr.post-separator.styled-separator.is-style-wide.section-inner {
+    display: none !important;
+}
+/* 15/10 chỉnh phần prev và next post */
+/* Ẩn hr mặc định */
+hr.styled-separator.is-style-wide {
+    display: none !important;
+}
+
+/* Container chính */
+.custom-post-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+/* Mỗi bài (prev / next) */
+.nav-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+/* Cột ngày-tháng-năm bên trái */
+.nav-item .nav-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+}
+
+/* Ngày */
+.nav-item .nav-date .day {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+/* Dấu gạch giữa ngày và tháng */
+.nav-item .nav-date .divider {
+    font-size: 16px;
+    margin: -5px 0;
+    color: #999;
+}
+
+/* Tháng */
+.nav-item .nav-date .month {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Năm nhỏ ở góc phải */
+.nav-item .nav-date .year {
+    position: absolute;	
+    right: -8px;
+    bottom: 15px;
+    font-size: 20px;
+    color: #000;
+}
+
+/* Tiêu đề bài */
+.nav-item .nav-title {
+    font-size: 16px;
+    color: #000;
+    text-decoration: none;
+    margin-left: 50px;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+}
+
+.nav-item .nav-title:hover {
+    color: #c00;
+}
+
