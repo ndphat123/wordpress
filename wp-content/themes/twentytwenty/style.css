@@ -5162,9 +5162,9 @@ a.to-the-top>* {
 	.archive-title {
 		font-size: 3.2rem;
 	}
-
+/* Khoảng cách bài viết */
 	body:not(.singular) main>article:first-of-type {
-		padding: 8rem 0 0;
+		padding: 0rem 0 0;
 	}
 
 	h2.entry-title {
@@ -7660,84 +7660,128 @@ div.no-search-results-form form.search-form::before {
 }
 
 /* css 2 */
-/* ==== K?t qu? tìm ki?m d?ng th? ngang ==== */
-.search-card {
-	display: flex;
-	align-items: center;
-	background: #fff;
-	border: 1px solid #e5e5e5;
-	margin-bottom: 20px;
-	border-radius: 8px;
-	overflow: hidden;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+/* ======================================================== */
+/* CSS TỐI ƯU CHO KẾT QUẢ TÌM KIẾM (Search Results) */
+/* ======================================================== */
+
+/* Container */
+.search-results-container {
+    margin: 0 auto 20px auto; /* Margin dưới để phân tách kết quả */
+    padding: 0;
 }
 
+/* Thẻ kết quả (Search Card) */
+.search-card {
+    display: flex;
+    align-items: flex-start; /* Quan trọng: Căn chỉnh nội dung ở trên cùng */
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover Effect */
+.search-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ảnh đại diện */
+/* Lưu ý: Nếu bạn không sử dụng ảnh, bỏ qua phần này */
 .search-thumb {
-	flex: 0 0 250px;
+    flex: 0 0 200px; /* Chiếm 200px cố định */
+    max-height: 150px; /* Giới hạn chiều cao */
+    overflow: hidden;
+    /* Dùng Flexbox để ảnh căn chỉnh và không bị kéo dài */
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
 }
 
 .search-thumb img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Quan trọng: Đảm bảo ảnh không bị méo */
+    display: block;
 }
 
+/* Khối nội dung chính (Bao gồm Ngày tháng và Tiêu đề) */
 .search-content {
-	display: flex;
-	align-items: center;
-	padding: 20px;
-	width: 100%;
+    display: flex;
+    align-items: flex-start; /* Căn chỉnh nội dung và ngày tháng */
+    padding: 20px;
+    width: 100%;
 }
 
+/* Cột Ngày tháng */
 .search-date {
-	text-align: center;
-	margin-right: 20px;
-	border-right: 2px solid #ddd;
-	padding-right: 20px;
+    flex-shrink: 0;
+    text-align: center;
+    margin-right: 20px;
+    border-right: 2px solid #ddd;
+    padding-right: 20px;
 }
 
 .search-date .day {
-	font-size: 38px;
-	font-weight: bold;
+    font-size: 30px; /* Giảm nhẹ để tránh tràn */
+    font-weight: bold;
+    line-height: 1.1;
+    color: #c00; /* Màu nổi bật cho ngày */
 }
 
 .search-date .month {
-	font-size: 30px;
-	text-transform: uppercase;
-	color: #888;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #888;
 }
 
+/* Cột Tiêu đề và Tóm tắt */
 .search-text {
-	flex: 1;
+    flex: 1;
+}
+
+.search-title {
+    margin: 0 0 5px 0;
 }
 
 .search-title a {
-	color: #0073aa;
-	text-decoration: none;
-	font-weight: 700;
+    font-size: 2.15rem;
+    font-weight: 700;
+    color: #0073aa;
+    text-decoration: none;
+    transition: color 0.2s;
 }
 
 .search-title a:hover {
-	color: #005177;
+    color: #005177;
 }
 
 .search-excerpt {
-	color: #555;
-	margin-top: 8px;
-	font-size: 14px;
+    color: #555;
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-/* khung nh? g?n */
-.search-results-container {
-	/* max-width: 900px; */
-	margin: 0 auto;
-}
+/* Responsive: Chuyển sang bố cục một cột trên màn hình nhỏ */
+@media (max-width: 768px) {
+    .search-card {
+        flex-direction: column;
+        align-items: center;
+    }
 
-/* hover */
-.search-card:hover {
-	transform: translateY(-3px);
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-	transition: 0.2s;
+    .search-thumb {
+        width: 100%; /* Ảnh chiếm toàn bộ chiều rộng */
+        max-height: 200px; 
+    }
+
+    .search-content {
+        align-items: flex-start;
+        padding: 15px;
+    }
 }
 
 
@@ -7827,7 +7871,7 @@ div.no-search-results-form form.search-form::before {
 	position: relative;
 }
 
-.tdc-date-circle {
+/* .tdc-date-circle {
 	position: absolute;
 	top: 5px;
 	right: 85px;
@@ -7876,7 +7920,7 @@ div.no-search-results-form form.search-form::before {
 	font-weight: bold;
 	margin-top: -12px;
 	margin-left: -29px;
-}
+} */
 
 /* 15/10/2025 chỉnh khung tiêu đề  */
 /* ======= KHUNG CHO TIÊU ĐỀ TRONG BÀI VIẾT ======= */
@@ -8004,70 +8048,727 @@ hr.styled-separator.is-style-wide {
 
 /* 15/10 chỉnh sửa bình luận */
 /* ==== Comment Form Style (Login View) ==== */
+/* 1. Hộp Bao Quanh (Card) - Thay thế .make-post-wrapper */
 #respond {
-    background: #ffffff; /* Ð?i thành n?n tr?ng d? gi?ng ?nh 2 */
-    border: 1px solid #ddd;
-    border-radius: 6px; /* Gi?m bo góc */
-    padding: 15px 20px; /* Gi?m padding d? h?p g?n hon */
-    max-width: 600px; /* Gi?m chi?u r?ng t?i da */
-    margin: 30px auto;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Shadow nh? nhàng hon */
-}
-
-/* Tiêu d? form */
-#respond .comment-reply-title {
-    font-size: 16px; 
-    font-weight: 500;
-    color: #606770; 
-    margin-bottom: 5px; 
-    border: 1px solid #ddd;
-    padding: 5px 8px; /* Ðã gi?m padding d? h?p nh? l?i */
-    background: transparent !important;
-    text-align: left;
-    margin-right: 456px;
-    margin-top: 10px; 
-}
-
-/* ?n dòng “Ðang nh?p v?i tên…” */
-.logged-in-as {
-    display: none;
-}
-/* Textarea */
-#respond textarea {
-    width: 100%;
-    resize: none;
+    max-width: 600px;
+    margin: 30px auto 20px auto; 
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border: none; /* Bỏ viền tổng thể, dùng viền cho phần form bên dưới */
     border-radius: 4px;
-    border: 1px solid #ddd; /* Vi?n nh?t hon */
-    padding: 10px;
-    font-size: 14px;
-    margin-bottom: 10px; /* T?o kho?ng cách v?i nút */
-    background: #fff;
-    box-sizing: border-box;
-    outline: none;
+    padding: 0; 
 }
-/* Cấu trúc Form */
-.comment-form {
+
+/* 2. Tiêu đề "Make a Post" - Thay thế .make-post-header */
+#respond .comment-reply-title {
+    /* Thiết lập tab */
+    background-color: #fff; 
+    padding: 10px 15px;
+    font-weight: 500;
+    color: #333;
+    display: inline-block; /* Quan trọng: làm cho background chỉ bao bọc chữ */
+    border: 1px solid #e0e0e0;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    margin-bottom: -1px; /* Kéo lên để che viền trên của form */
+    margin-left: 15px; /* Thụt lề nhẹ để giống tab */
+    /* Các thuộc tính khác của tiêu đề */
+    font-size: 16px; 
+    margin-top: 10px; /* Đẩy xuống một chút */
+}
+
+/* 3. Phần thân (Form chứa Textarea và Nút) - Thay thế .make-post-body */
+#commentform { 
+    /* Form này chứa textarea và nút submit - đóng vai trò là phần thân có viền */
+    border: 1px solid #e0e0e0;
+    border-radius: 0 4px 4px 4px; 
+    padding: 12px 15px;
     display: flex;
     flex-direction: column;
+    margin: 0; /* Đảm bảo không có margin mặc định */
 }
 
-/* Nút g?i - Ð?i v? trí và màu */
+/* 4. Textarea - Thay thế .make-post-input */
+#respond textarea {
+    width: 100%;
+    border: none; /* BỎ VIỀN: Textarea không có viền riêng */
+    resize: none;
+    padding: 0;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+    outline: none;
+    /* Bỏ các thuộc tính cũ không cần thiết */
+    margin: 0; 
+    background: #fff;
+    box-sizing: border-box;
+}
+
+/* 5. Nút gửi - Thay thế .make-post-share */
 #respond input[type="submit"] {
-    background-color: #1877f2;
+    align-self: flex-end;
+    background-color: #007bff; 
     color: #fff;
     border: none;
     border-radius: 4px;
-    padding: 8px 16px; /* Gi?m padding nút */
-    font-size: 14px;
+    padding: 6px 16px;
+    margin-top: 10px;
     cursor: pointer;
-    transition: background 0.2s ease;
-    
-    /* Canh nút sang ph?i */
-    align-self: flex-end; 
-    margin-top: 5px; /* Kho?ng cách trên nút */
-    margin-left: 474px;
+    font-size: 14px;
+    transition: background 0.2s;
+    text-transform: lowercase; /* Đảm bảo chữ viết thường nếu bạn không muốn chữ in hoa */
+	margin-left: 390px;
 }
 
 #respond input[type="submit"]:hover {
-    background-color: #0f5dc6;
+    background-color: #0069d9;
+}
+
+/* 6. Ẩn dòng “Đăng nhập với tên…” */
+.logged-in-as {
+    display: none;
+}
+/* 15/10 chỉnh bố cụ bài viết chi tiết  */
+/* ==== 1. CSS BỐ CỤC 3 CỘT (SINGLE POST LAYOUT) ==== */
+
+.single-post-three-column-layout {
+    display: grid;
+    /* Cột 1 (Categories): 250px | Cột 2 (Detail): Tự co giãn (1fr) | Cột 3 (Recent Posts): 300px */
+    grid-template-columns: 250px 1fr 300px; 
+    gap: 30px; 
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Căn chỉnh nội dung Sidebar */
+.sidebar-left,
+.sidebar-right {
+    padding-top: 20px; 
+}
+
+/* Điều chỉnh lại vị trí của khối dưới 3 cột (Prev/Next, Comment) */
+.below-three-columns {
+    /* Đặt chiều rộng bằng cột Detail + Recent Post + Gap */
+    max-width: 930px; 
+    width: 100%;
+    margin: 30px auto; 
+}
+/* 15/10 category bài viêt chi tiết  */
+/* ==== 2. CSS WIDGET CATEGORIES (9) (Giao diện Sọc chéo, chấm vàng) ==== */
+
+/* Khung Widget Tổng thể */
+.sidebar-left .widget_categories,
+.sidebar-left .wp-block-categories {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 0; 
+    margin-bottom: 25px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+    overflow: hidden; 
+}
+
+/* Tiêu đề "Categories" và Sọc Chéo */
+.sidebar-left .widget-title,
+.sidebar-left .wp-block-heading {
+    font-size: 26px; 
+    font-weight: 800;
+    color: #333;
+    padding: 15px; 
+    margin-bottom: 0;
+    line-height: 1.2;
+    text-transform: capitalize; 
+    position: relative;
+    z-index: 1;
+}
+
+/* Hiệu ứng gạch chéo */
+.sidebar-left .widget-title::after,
+.sidebar-left .wp-block-heading::after {
+    content: "";
+    display: block;
+    height: 12px;
+    width: 100%;
+    margin-top: 5px; 
+    background: repeating-linear-gradient(
+      -45deg,
+      #f7f7f7, #f7f7f7 2px, #fff 2px, #fff 4px
+    );
+    border-top: 1px solid #eee; 
+}
+
+/* Danh sách Mục */
+.sidebar-left ul {
+    list-style: none;
+    padding: 0 15px 5px 15px; 
+    margin: 0;
+}
+
+.sidebar-left ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee; 
+    position: relative;
+    margin-left: 0; 
+}
+
+.sidebar-left ul li:last-child {
+    border-bottom: none;
+    padding-bottom: 15px;
+}
+
+/* Dấu chấm vàng */
+.sidebar-left ul li::before {
+    content: "\2022";
+    color: #ffc107; 
+    font-size: 1.5em; 
+    font-weight: bold;
+    display: inline-block; 
+    width: 0.5em;
+    margin-right: 10px; 
+    float: left; 
+    line-height: 0.8; 
+}
+
+/* Chỉnh sửa link */
+.sidebar-left ul li a {
+    color: #3f729b; 
+    text-decoration: none;
+    padding-left: 20px;
+    display: block;
+}
+
+.sidebar-left ul li a:hover {
+    color: #007bff;
+}
+/* 15/10/2025 chỉnh recent post */
+/* ==== 3. CSS WIDGET RECENT POSTS (10) (Giao diện Đồng hồ nhỏ) ==== */
+
+/* Khung widget Recent Post */
+.sidebar-right .widget,
+.sidebar-right .recent-posts-custom {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+    margin-bottom: 25px;
+}
+
+/* Tiêu đề Recent Posts */
+.sidebar-right h5 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+    padding-left: 0 !important; 
+}
+
+/* Từng mục bài viết */
+.recent-post-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dotted #ccc;
+}
+
+.recent-post-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* Đồng hồ ngày tháng nhỏ */
+.custom-post-date-circle1 {
+    width: 40px;
+    height: 40px;
+    background-color: #ffc107;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1;
+    margin-right: 10px;
+    flex-shrink: 0; 
+}
+
+.custom-post-date-circle1 .date-day {
+    font-size: 14px;
+}
+.custom-post-date-circle1 .date-year {
+    display: none; 
+}
+
+/* Tiêu đề bài viết */
+.recent-post-title {
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    line-height: 1.4;
+}
+
+.recent-post-title:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+/* 17/10/2025 chỉnh trang chi tiêt hiển thị catagory bên trái  */
+
+/* ========== BỐ CỤC CHUNG 3 CỘT ========== */
+.tdc-single-layout {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr 1fr;
+    gap: 25px;
+    width: 90%;
+    margin: 40px auto;
+}
+
+/* ========== TIÊU ĐỀ VÀ ĐỒNG HỒ ========== */
+.tdc-single-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	flex-wrap: wrap; /* Cho responsive, tránh chồng khi màn hình nhỏ */
+	margin-bottom: 25px;
+}
+
+.tdc-single-title {
+	font-size: 28px;
+	font-weight: 700;
+	line-height: 1.3;
+	margin: 0;
+	color: #000;
+	flex: 1;
+	word-break: break-word;
+}
+
+/* ========== ĐỒNG HỒ VÀNG ========== */
+.tdc-date-circle.beside-title {
+	background: #ffdd00;
+	border-radius: 50%;
+	width: 90px;
+	height: 90px;
+	padding: 15px;
+	text-align: center;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+	margin-top: 5px;
+}
+
+.tdc-date-circle.beside-title .day {
+	font-size: 22px;
+	font-weight: bold;
+	margin-bottom: -15px;
+	margin-left: -25px;
+}
+
+.tdc-date-circle.beside-title .line-year {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 2px 0;
+}
+
+.tdc-date-circle.beside-title .line {
+	font-size: 14px;
+	font-weight: bold;
+	margin-right: 4px;
+}
+
+.tdc-date-circle.beside-title .year {
+	font-size: 22px;
+	font-weight: bold;
+	color: #333;
+}
+
+.tdc-date-circle.beside-title .month {
+	font-size: 22px;
+	font-weight: bold;
+	margin-top: -13px;
+	margin-left: -25px;
+}
+
+/* ========== RESPONSIVE FIX ========== */
+@media (max-width: 768px) {
+	.tdc-single-header {
+		flex-direction: column !important;
+		align-items: flex-start !important;
+	}
+	.tdc-date-circle.beside-title {
+		margin-top: 10px !important;
+	}
+}
+
+
+/* ========== CÁC THANH BÊN ========== */
+.sidebar-left,
+.sidebar-right {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.sidebar-left h3,
+.sidebar-right h3 {
+    font-size: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+/* ========== PHẦN BÌNH LUẬN ========== */
+.tdc-comments-box {
+    margin-top: 40px;
+    padding: 20px;
+    border-top: 2px solid #f1f1f1;
+    background: #fafafa;
+    border-radius: 8px;
+}
+
+.tdc-comments-box h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.tdc-comments-box textarea,
+.tdc-comments-box input {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.tdc-comments-box input[type="submit"] {
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.tdc-comments-box input[type="submit"]:hover {
+    background-color: #005f8d;
+}
+/* 17/10/2025 chỉnh phần bài viết gần đây trong trang chi tiết  */
+/* Sidebar Right Container */
+.sidebar-right {
+    background: #fffaf0;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-right h3 {
+    font-weight: bold;
+    margin-bottom: 15px;
+    border-left: 4px solid #d10000;
+    padding-left: 10px;
+    color: #222;
+}
+
+/* Danh sách Bài viết gần đây */
+.recent-posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Từng mục bài viết (Thay thế .timeline-item) */
+.nav-item {
+    display: flex;
+    align-items: center; /* Canh giữa theo chiều dọc */
+    padding: 10px 0;
+}
+
+.nav-item:not(:last-child) {
+    border-bottom: 1px dashed #e6e6e6; /* Đường phân cách mờ */
+}
+
+/* Khối ngày tháng (Date Box) theo CSS mẫu */
+.nav-item .nav-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* Chiều rộng khối ngày tháng */
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    flex-shrink: 0; /* Ngăn khối này bị co lại */
+    color: #000;
+	margin-left: -40px;
+}
+
+/* Ngày */
+.nav-item .nav-date .day {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+/* Dấu gạch giữa ngày và tháng */
+.nav-item .nav-date .divider {
+    font-size: 16px;
+    margin: -5px 0;
+    color: #999;
+}
+
+/* Tháng */
+.nav-item .nav-date .month {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+/* Năm nhỏ ở góc phải */
+.nav-item .nav-date .year {
+    position: absolute;
+    right: -8px; /* Điều chỉnh vị trí ra ngoài date box */
+    bottom: 19px;
+    font-size: 21px; /* Điều chỉnh kích thước năm nhỏ hơn ảnh 2 */
+    color: #000;
+    font-weight: 600;
+    line-height: 1;
+}
+
+/* Cột phân cách dọc (Tái tạo đường đỏ trong ảnh) */
+.nav-divider-col {
+    width: 40px;
+    height: 100%; /* Đảm bảo chiều cao đầy đủ */
+    background-color: #c00; /* Màu đỏ */
+    margin: 0 10px;
+    align-self: stretch; /* Kéo dài chiều cao bằng item */
+    /* min-height: 50px; Đảm bảo chiều cao tối thiểu nếu nội dung quá ngắn */
+}
+
+/* Khối nội dung */
+.nav-content-col {
+    flex-grow: 1;
+}
+
+/* Tiêu đề bài viết */
+.nav-post-title {
+    font-size: 15px;
+    color: #111;
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.nav-post-title:hover {
+    color: #c00;
+    text-decoration: underline;
+}
+
+/* 17/10/2025 thêm  Archive và Comments ở trang chủ  */
+/* ========================================= */
+/* CSS cho Giao diện Trang chủ 3 Cột (Ảnh 2) */
+/* ========================================= */
+
+#tdc-homepage-layout {
+    display: flex;
+    max-width: 1520px; /* Điều chỉnh max-width phù hợp với theme */
+    margin: 20px auto;
+    padding: 0 20px;
+    gap: 10px; /* Khoảng cách giữa các cột */
+}
+
+/* Cột giữa - Nội dung chính */
+.tdc-content-center {
+    flex: 2; /* Chiếm nhiều không gian hơn */
+    min-width: 0;
+	max-width: 800px; 
+}
+
+.tdc-sidebar-left {
+    flex: 1 !important; /* Tăng flex để cột trái rộng hơn (ví dụ: 1.2) */
+    background: #ffffff; 
+    padding: 20px 25px; 
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    align-self: flex-start; 
+}
+
+/* Cột trái & Cột phải - Sidebars */
+.tdc-sidebar-right {
+    flex: 1; /* Chiếm 1 phần không gian */
+    background: #ffffff; /* Nền trắng */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    align-self: flex-start; /* Giữ sidebar luôn nằm ở trên */
+}
+
+/* Tiêu đề Sidebar */
+.tdc-sidebar-left h3,
+.tdc-sidebar-right h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #ccc; /* Đường kẻ dưới tiêu đề */
+}
+
+/* --- CỘT TRÁI: XEM NHIỀU/ARCHIVE --- */
+/* ======================================================== */
+/* CSS cho Cột TRÁI: XEM NHIỀU (Dạng 2 Cột - Giống Ảnh 2) */
+/* ======================================================== */
+
+/* Tiêu đề Sidebar */
+.tdc-sidebar-left h3 {
+    border-bottom: 2px solid #ccc; /* Thêm đường phân cách dưới tiêu đề */
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+}
+
+/* Container chính chuyển thành GRID 2 cột */
+.tdc-popular-grid {
+    display: grid; 
+    grid-template-columns: 1fr 1fr; /* 2 cột bằng nhau */
+    gap: 15px 10px; /* Khoảng cách giữa các mục */
+	color: #000;
+    margin: 0;
+    padding: 0;
+	/* Viền trên đậm hơn */
+    /* border: 2px solid #000;  */
+	border: none !important;
+}
+
+.tdc-popular-grid-item {
+    display: flex;
+    align-items: flex-start; /* Căn chỉnh số và tiêu đề */
+	/* border: 2px solid #000; */
+	/* ĐƯỜNG PHÂN CÁCH MẢNH MÀU XÁM */
+    border-right: 1px solid #ddd; /* Đường phân cách cột mảnh */
+    border-bottom: 1px solid #ddd; /* Đường phân cách hàng mảnh */
+}
+
+/*  LOẠI BỎ VIỀN THỪA (Tạo sự liền mạch) */
+
+/* Loại bỏ border-right cho cột cuối cùng (2n) */
+.tdc-popular-grid-item:nth-child(2n) {
+    border-right: none;
+}
+
+/* Loại bỏ border-bottom cho các mục ở hàng cuối */
+/* Giả sử bạn hiển thị 6 mục (3 hàng x 2 cột): loại bỏ mục 5 và 6 */
+.tdc-popular-grid-item:nth-last-child(-n+2) {
+    border-bottom: none;
+}
+
+.tdc-popular-grid-item:nth-last-child(-n+1) {
+    border-bottom: none;
+}
+
+/* Nếu bạn hiển thị 8 mục (4 hàng x 2 cột): loại bỏ mục 7 và 8 */
+/* .tdc-popular-grid-item:nth-last-child(-n+2) {
+    border-bottom: none;
+} */
+
+
+/* Số thứ tự LỚN và MÀU ĐEN NHẠT */
+.tdc-popular-number {
+    font-size: 30px; /* Số lớn */
+    font-weight: bold;
+    color: #333; /* Màu đen */
+    margin-right: 10px;
+    line-height: 1;
+    width: 35px; 
+    text-align: right;
+    flex-shrink: 0;
+    padding-top: 25px; 
+}
+
+/* Tiêu đề bài viết - IN ĐẬM */
+.tdc-popular-title {
+    font-size: 15px;
+    font-weight: bold; /* Tiêu đề in đậm */
+    color: #8c8c8c; /*Màu xám nhạt*/
+    text-decoration: none;
+    line-height: 1.3;
+    padding-top: 10px; /* Căn chỉnh tiêu đề với số thứ tự lớn */
+    transition: color 0.2s;
+}
+
+.tdc-popular-title:hover {
+    color: #c00;
+}
+
+
+
+/* .tdc-popular-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tdc-popular-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px dotted #eee;
+}
+
+.tdc-popular-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #c00; 
+    margin-right: 15px !important;
+    line-height: 1;
+    width: 13px !important;
+    text-align: right !important;
+}
+
+.tdc-popular-title {
+    font-size: 15px;
+    color: #333;
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.2s;
+}
+
+.tdc-popular-title:hover {
+    color: #c00;
+} */
+
+/* --- CỘT PHẢI: COMMENTS --- */
+.tdc-sidebar-right h3 {
+    border-bottom: 2px solid #ccc; /* Đồng nhất border với cột trái */
+}
+
+.tdc-comments-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tdc-comments-list li {
+    padding: 8px 0;
+    border-bottom: 1px dotted #eee;
+}
+
+.tdc-comment-content {
+    font-size: 14px;
+    color: #007bff; /* Màu xanh nổi bật */
+    text-decoration: none;
+    display: block;
+    line-height: 1.4;
+}
+
+.tdc-comment-content:hover {
+    text-decoration: underline;
+    color: #c00;
 }

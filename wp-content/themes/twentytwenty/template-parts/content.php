@@ -69,51 +69,86 @@
         </div>
 
     <?php else : ?>
-        <!-- ========== GIAO DIỆN TRANG CHI TIẾT (CÓ ĐỒNG HỒ NGÀY THÁNG) ========== -->
-        <div class="tdc-single-wrapper">
+        <!-- ========== GIAO DIỆN TRANG CHI TIẾT (ĐỒNG HỒ NGANG TIÊU ĐỀ + COMMENT ĐẸP) ========== -->
+        <div class="tdc-single-layout">
 
-        <div class="border">
-            <h1 class="tdc-single-title"><?php the_title(); ?></h1>
-        </div>
-            <!-- Đồng hồ ngày tháng góc phải -->
-            <div class="tdc-date-circle">
-                <div class="day"><?php echo get_the_date('d'); ?></div>
-                <div class="line-year">
-                    <span class="line">——</span>
-                    <span class="year"><?php echo get_the_date('y'); ?></span>
+            <!-- Cột trái: Categories -->
+            <aside class="sidebar-left">
+                <h3>Categories</h3>
+                <ul>
+                    <?php wp_list_categories(['title_li' => '']); ?>
+                </ul>
+            </aside>
+
+            <!-- Cột giữa: Nội dung bài viết -->
+            <div class="tdc-single-wrapper">
+
+                <!-- TIÊU ĐỀ + NGÀY THÁNG NGANG HÀNG -->
+                <div class="tdc-single-header">
+                    <h1 class="tdc-single-title"><?php the_title(); ?></h1>
+                    <div class="tdc-date-circle beside-title">
+                        <div class="day"><?php echo get_the_date('d'); ?></div>
+                        <div class="line-year">
+                            <span class="line">——</span>
+                            <span class="year"><?php echo get_the_date('y'); ?></span>
+                        </div>
+                        <div class="month"><?php echo get_the_date('m'); ?></div>
+                    </div>
                 </div>
-                <div class="month"><?php echo get_the_date('m'); ?></div>
+
+
+
+                <!-- NỘI DUNG BÀI VIẾT -->
+                <div class="tdc-single-content">
+                    <?php the_content(); ?>
+                </div>
+
+                <!-- ĐIỀU HƯỚNG -->
+                <div class="post-footer section-inner">
+                    <?php get_template_part('template-parts/navigation'); ?>
+                </div>
+
+                <!-- PHẦN BÌNH LUẬN -->
+                <?php if (comments_open() || get_comments_number()) : ?>
+                    <div class="tdc-comments-box">
+                        <?php comments_template(); ?>
+                    </div>
+                <?php endif; ?>
             </div>
 
+            <!-- Cột phải: Bài viết gần đây -->
+            <aside class="sidebar-right">
+                <h3>Bài viết gần đây</h3>
+                <ul class="recent-posts-list">
+                    <?php
+                    $recent_posts = wp_get_recent_posts([
+                        'numberposts' => 5,
+                        'post_status' => 'publish',
+                        'suppress_filters' => false
+                    ]);
 
-            <!-- Nội dung bài viết -->
-            <div class="tdc-single-content">
-                <?php the_content(); ?>
-            </div>
-
-            <!-- Navigation + Comment -->
-            <div class="post-footer section-inner">
-                <?php
-                // Điều hướng bài trước / bài sau
-                get_template_part('template-parts/navigation');
-
-                // Hiển thị comment nếu bật
-                // if ((comments_open() || get_comments_number()) && !post_password_required()) {
-                //     echo '<div class="comments-wrapper section-inner">';
-                //     comments_template();
-                //     echo '</div>';
-                // }
-                ?>
-            </div>
-
+                    foreach ($recent_posts as $post) :
+                        // Thiết lập các biến ngày tháng
+                        $day = get_the_date('d', $post['ID']);
+                        $month = get_the_date('m', $post['ID']);
+                        $year = get_the_date('y', $post['ID']); // Lấy năm 2 chữ số
+                    ?>
+                        <li class="nav-item">
+                            <div class="nav-date">
+                                <span class="day"><?php echo $day; ?></span>
+                                <span class="divider">—</span> <span class="month"><?php echo $month; ?></span>
+                                <span class="year"><?php echo $year; ?></span>
+                            </div>
+                            <div class="nav-divider-col"></div>
+                            <div class="nav-content-col">
+                                <a href="<?php echo get_permalink($post['ID']); ?>" class="nav-post-title">
+                                    <?php echo esc_html($post['post_title']); ?>
+                                </a>
+                            </div>
+                        </li>
+                    <?php endforeach;
+                    wp_reset_query(); ?>
+                </ul>
+            </aside>
         </div>
     <?php endif; ?>
-
-    <?php
-    // Hiển thị bình luận nếu là bài viết chi tiết
-    if (is_single() && (comments_open() || get_comments_number())) {
-        comments_template();
-    }
-    ?>
-
-</article>
