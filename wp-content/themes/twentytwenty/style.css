@@ -8991,4 +8991,65 @@ hr.styled-separator.is-style-wide {
     background: #fafafa;
 }
 
- 
+ /* 31/10 Latest News ở cuối tìm kiếm */
+ .tdc-latest-news {
+  border-top: 2px solid #ddd;
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+.tdc-latest-title {
+  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.tdc-latest-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tdc-latest-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-left: 2px solid #0073aa;
+  padding-left: 10px;
+  margin-bottom: -7px;
+}
+
+.tdc-latest-dot {
+  position: relative;
+  left: -20px;  /* Đưa chấm tròn đè lên đường kẻ dọc */
+  top: -1px;    /* Căn giữa với dòng đầu tiên */
+  width: 20px;
+  height: 20px;
+  background-color: #fff; /* nền trắng */
+  border: 3px solid #007bff; /* viền xanh */
+  border-radius: 50%;
+  margin-right: 10px;
+  z-index: 1;
+}
+
+
+.tdc-latest-content {
+  flex: 1;
+}
+
+.tdc-latest-title-link {
+  color: #0073aa;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.tdc-latest-title-link:hover {
+  text-decoration: underline;
+}
+
+.tdc-latest-date {
+  color: #0073aa;
+  font-size: 13px;
+  white-space: nowrap;
+  margin-left: 10px !important;
+}

@@ -210,6 +210,36 @@ get_header();
 
 
 </div>
+<!-- thêm bình luận ở cuối dòng search -->
+ <?php if ( is_search() ) : ?>
+    <section class="tdc-latest-news section-inner">
+        <h3 class="tdc-latest-title">Latest News</h3>
+        <ul class="tdc-latest-list">
+            <?php
+            $latest_news = new WP_Query(array(
+                'posts_per_page' => 3, // số bài mới nhất
+                'orderby' => 'date',
+                'order' => 'DESC',
+            ));
+
+            if ($latest_news->have_posts()) :
+                while ($latest_news->have_posts()) : $latest_news->the_post(); ?>
+                    <li class="tdc-latest-item">
+                        <span class="tdc-latest-dot"></span>
+                        <div class="tdc-latest-content">
+                            <a href="<?php the_permalink(); ?>" class="tdc-latest-title-link"><?php the_title(); ?></a>
+                            <p class="tdc-latest-excerpt"><?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?></p>
+                        </div>
+                        <span class="tdc-latest-date"><?php echo get_the_date('d F, Y'); ?></span>
+                    </li>
+                <?php endwhile;
+                wp_reset_postdata();
+            endif;
+            ?>
+        </ul>
+    </section>
+<?php endif; ?>
+
 
 <?php get_template_part('template-parts/footer-menus-widgets'); ?>
 <?php get_footer(); ?>
