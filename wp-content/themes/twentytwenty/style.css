@@ -4024,8 +4024,8 @@ div.comment:first-of-type {
 .comment-respond p {
 	line-height: 1.1;
 	margin-bottom: 2rem;
-	margin-left: auto;
-	margin-right: auto;
+	/* margin-left: auto;
+	margin-right: auto; */
 }
 
 .comment-respond p:not(.comment-notes) {
@@ -8772,3 +8772,120 @@ hr.styled-separator.is-style-wide {
     text-decoration: underline;
     color: #c00;
 }
+
+
+/* 17/10/2025 chỉnh pages trong kết quả tìm kiếm */
+/* ======================================================== */
+/* CSS CHO DANH SÁCH PAGES (Sidebar Trái trên Search) */
+/* ======================================================== */
+
+.tdc-page-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.tdc-page-list a {
+    display: block;
+    padding: 5px 0;
+    font-size: 1rem;
+    color: #007bff; 
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.tdc-page-list a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* ======================================================== */
+/* ĐIỀU CHỈNH BỐ CỤC CHO TRANG TÌM KIẾM (2 CỘT) */
+/* ======================================================== */
+
+/* Vì cột Pages (tdc-sidebar-left) và Nội dung (tdc-content-center) vẫn còn, 
+   ta chỉ cần đảm bảo tdc-homepage-layout giữ nguyên display: flex */
+
+/* #tdc-homepage-layout {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 1520px;
+    margin: 20px auto;
+}
+
+Đảm bảo Sidebar Pages và Content Center có kích thước đúng
+.tdc-sidebar-left {
+    flex: 0 0 250px; Cố định chiều rộng cho cột trái (Pages/Xem Nhiều)
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.tdc-content-center {
+    flex: 1; Cột giữa chiếm hết không gian còn lại
+    min-width: 500px; 
+} */
+
+/* Tác dụng của CSS:
+   - Trên Trang Chủ: 3 cột (Xem Nhiều + Nội dung + Comments)
+   - Trên Trang Tìm Kiếm: 2 cột (Pages + Nội dung)
+   - Trên Trang Bài Viết Đơn/Thể Loại: 1 cột (Nội dung chiếm hết) 
+*/
+/* 31/10/2025 chỉnh sửa trang kết quả tìm kiếm last pages */
+/* Trang tìm kiếm giống trang chủ */
+.latest-post-item {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+.latest-post-heading a {
+    font-weight: 600;
+    color: #000;
+    text-decoration: none;
+}
+.latest-post-heading a:hover {
+    color: #0073aa;
+}
+.latest-post-thumbnail img {
+    width: 100%;
+    border-radius: 8px;
+    margin: 5px 0;
+}
+.latest-post-excerpt {
+    font-size: 0.95rem;
+    color: #444;
+}
+.latest-post-category {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.tdc-comments-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.tdc-comments-list li {
+    margin-bottom: 10px;
+    background: #f7f7f7;
+    padding: 8px 10px;
+    border-radius: 6px;
+}
+.tdc-comments-list a {
+    font-weight: 500;
+    color: #0073aa;
+    text-decoration: none;
+}
+.tdc-comments-list a:hover {
+    text-decoration: underline;
+}
+.comment-author {
+    display: block;
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 3px;
+}
+
+ 

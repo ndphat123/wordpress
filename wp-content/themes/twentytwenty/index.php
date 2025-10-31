@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The main template file
  *
@@ -12,126 +11,168 @@ get_header();
 
 <div id="tdc-homepage-layout">
 
-<?php if ( is_front_page() ) : // CHỈ HIỂN THỊ TRÊN TRANG CHỦ TĨNH ?>
-	<aside class="tdc-sidebar-left">
+<?php if ( is_front_page() ) : // ===== CHỈ HIỂN THỊ TRÊN TRANG CHỦ ===== ?>
+    <aside class="tdc-sidebar-left">
         <h3>Xem nhiều</h3>
-        
         <div class="tdc-popular-grid">
             <?php
-            // Khối lấy các bài viết GẦN ĐÂY nhất
             $recent_posts_args = array(
-                'posts_per_page'      => 6, // Lấy 6 bài viết gần đây
-                'orderby'             => 'date', // Sắp xếp theo ngày đăng
-                'order'               => 'DESC', // Mới nhất lên đầu
+                'posts_per_page'      => 6,
+                'orderby'             => 'date',
+                'order'               => 'DESC',
                 'ignore_sticky_posts' => true
             );
 
-            $recent_posts_query = new WP_Query( $recent_posts_args );
+            $recent_posts_query = new WP_Query($recent_posts_args);
 
-            if ( $recent_posts_query->have_posts() ) {
+            if ($recent_posts_query->have_posts()) {
                 $index = 0;
-                while ( $recent_posts_query->have_posts() ) {
+                while ($recent_posts_query->have_posts()) {
                     $recent_posts_query->the_post();
                     $index++;
-                    // Sử dụng div để tạo mục con trong Grid
                     printf(
                         '<div class="tdc-popular-grid-item">
                             <span class="tdc-popular-number">%1$s</span>
                             <a href="%2$s" class="tdc-popular-title">%3$s</a>
                         </div>',
-                        $index, // Số thứ tự
-                        esc_url( get_permalink() ),
-                        esc_html( get_the_title() )
+                        $index,
+                        esc_url(get_permalink()),
+                        esc_html(get_the_title())
                     );
                 }
-                wp_reset_postdata(); // Đặt lại dữ liệu bài viết
+                wp_reset_postdata();
             } else {
-                // Đảm bảo thông báo lỗi cũng nằm trong một mục grid
                 echo '<div class="tdc-popular-grid-item">Không có bài viết gần đây nào.</div>';
             }
             ?>
         </div>
     </aside>
-	<?php endif; // End if ( is_front_page() ) ?>
+<?php endif; ?>
 
-	<?php if ( is_search() ) : // Nếu là TRANG TÌM KIẾM, hiển thị "Pages" ?>
-    <aside class="tdc-sidebar-left tdc-search-pages">
-        <h3>Pages</h3> 
-        <ul class="tdc-page-list">
+
+<?php if ( is_search() ) : // ===== TRANG TÌM KIẾM ===== ?>
+    <!-- 🔹 CỘT TRÁI: Bài viết mới nhất -->
+    <aside class="tdc-sidebar-left">
+        <h3>Trang mới nhất</h3>
+        <?php
+        $recent_posts = wp_get_recent_posts(array(
+            'numberposts' => 3,
+            'post_status' => 'publish'
+        ));
+
+        if ($recent_posts) :
+            foreach ($recent_posts as $post) :
+                $categories = get_the_category($post['ID']);
+                $category_name = !empty($categories) ? $categories[0]->name : 'Chưa phân loại';
+        ?>
+                <div class="latest-post-item">
+                    <h4 class="latest-post-heading">
+                        <a href="<?php echo get_permalink($post['ID']); ?>">
+                            <?php echo wp_trim_words($post['post_title'], 8, '...'); ?>
+                        </a>
+                    </h4>
+                    <a href="<?php echo get_permalink($post['ID']); ?>" class="latest-post-thumbnail">
+                        <?php echo get_the_post_thumbnail($post['ID'], 'medium'); ?>
+                    </a>
+                    <p class="latest-post-excerpt">
+                        <?php echo wp_trim_words($post['post_content'], 25, '...'); ?>
+                    </p>
+                    <div class="latest-post-category">
+                        Ngành: <?php echo esc_html($category_name); ?>
+                    </div>
+                </div>
+        <?php
+            endforeach;
+        else :
+            echo '<p>Không có bài viết mới nào.</p>';
+        endif;
+        ?>
+    </aside>
+<?php endif; ?>
+
+
+
+    <main id="site-content" class="tdc-content-center">
+        <?php
+        if (have_posts()) {
+            while (have_posts()) {
+                the_post();
+                get_template_part('template-parts/content', get_post_type());
+            }
+        } elseif (is_search()) {
+        ?>
+            <div class="no-search-results-form section-inner thin">
+                <?php get_search_form(array('aria_label' => __('search again', 'twentytwenty'))); ?>
+            </div>
+        <?php
+        } else {
+            echo '<p>Không tìm thấy bài viết nào.</p>';
+        }
+
+        get_template_part('template-parts/pagination');
+        ?>
+    </main>
+
+
+
+<?php if ( is_front_page() ) : // ===== CỘT PHẢI TRANG CHỦ ===== ?>
+    <aside class="tdc-sidebar-right">
+        <h3>Comments</h3>
+        <ul class="tdc-comments-list">
             <?php
-            // Lấy danh sách các trang (Pages)
-            wp_list_pages( array(
-                'title_li'    => '',
-                'depth'       => 1, // Chỉ hiển thị trang cấp 1
-                'sort_column' => 'menu_order',
-                'number'      => 5,
-            ) );
+            $comments = get_comments(array(
+                'number'      => 8,
+                'status'      => 'approve',
+                'type'        => 'comment',
+                'post_status' => 'publish'
+            ));
+
+            if ($comments) {
+                foreach ($comments as $comment) {
+                    printf(
+                        '<li><a href="%s" class="tdc-comment-content">%s</a></li>',
+                        esc_url(get_comment_link($comment)),
+                        esc_html($comment->comment_content)
+                    );
+                }
+            } else {
+                echo '<li>Không có bình luận nào.</li>';
+            }
             ?>
         </ul>
     </aside>
-    <?php 
-	endif; // Kết thúc điều kiện cột trái
-    ?>
+<?php endif; ?>
 
 
+<?php if ( is_search() ) : // ===== CỘT PHẢI TRANG TÌM KIẾM ===== ?>
+    <aside class="tdc-sidebar-right">
+        <h3>Bình luận mới nhất</h3>
+        <ul class="tdc-comments-list">
+            <?php
+            $comments = get_comments(array(
+                'number'      => 5,
+                'status'      => 'approve',
+                'type'        => 'comment',
+            ));
 
-	<main id="site-content" class="tdc-content-center">
+            if ($comments) :
+                foreach ($comments as $comment) : ?>
+                    <li>
+                        <a href="<?php echo esc_url(get_comment_link($comment)); ?>">
+                            <?php echo esc_html(wp_trim_words($comment->comment_content, 12, '...')); ?>
+                        </a>
+                        <span class="comment-author"><?php echo esc_html($comment->comment_author); ?></span>
+                    </li>
+                <?php endforeach;
+            else :
+                echo '<li>Chưa có bình luận nào.</li>';
+            endif;
+            ?>
+        </ul>
+    </aside>
+<?php endif; ?>
 
-		<?php
-		// Bỏ qua phần hiển thị tiêu đề Archive/Search vì đây là trang chủ 
-		// và đã được bao quanh bởi cấu trúc 3 cột.
+</div>
 
-		if (have_posts()) {
-			while (have_posts()) {
-				the_post();
-				// Sử dụng template part để hiển thị bài viết (sử dụng content.php)
-				get_template_part('template-parts/content', get_post_type());
-			}
-		} elseif (is_search()) {
-			// Hiển thị form search nếu không có kết quả
-		?>
-			<div class="no-search-results-form section-inner thin">
-				<?php get_search_form(array('aria_label' => __('search again', 'twentytwenty'),)); ?>
-			</div>
-		<?php
-		} else {
-			// Hiển thị thông báo nếu không có bài viết
-			echo '<p>Không tìm thấy bài viết nào.</p>';
-		}
-
-		// Phân trang
-		get_template_part('template-parts/pagination');
-		?>
-
-	</main>
-	<?php if ( is_front_page() ) : // CHỈ HIỂN THỊ TRÊN TRANG CHỦ TĨNH ?>
-	<aside class="tdc-sidebar-right">
-		<h3>Comments</h3>
-		<ul class="tdc-comments-list">
-			<?php
-			$comments = get_comments(array(
-				'number'      => 8, // Số lượng comment muốn hiển thị
-				'status'      => 'approve',
-				'type'        => 'comment',
-				'post_status' => 'publish'
-			));
-
-			if ($comments) {
-				foreach ($comments as $comment) {
-					// Hiển thị nội dung comment
-					printf(
-						'<li><a href="%s" class="tdc-comment-content">%s</a></li>',
-						esc_url(get_comment_link($comment)),
-						esc_html($comment->comment_content)
-					);
-				}
-			} else {
-				echo '<li>Không có bình luận nào.</li>';
-			}
-			?>
-		</ul>
-	</aside>
-	<?php endif; // End if ( is_front_page() ) ?>
-
-</div> <?php get_template_part('template-parts/footer-menus-widgets'); ?>
+<?php get_template_part('template-parts/footer-menus-widgets'); ?>
 <?php get_footer(); ?>
