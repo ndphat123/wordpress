@@ -110,15 +110,15 @@ if (comments_open() || pings_open()) {
 
 	comment_form(array(
 		'class_form' => 'section-inner thin max-percentage',
-		'title_reply' => 'Để lại bình luận của bạn',
+		'title_reply' => 'Make a post',
 		'title_reply_before' => '<h2 id="reply-title" class="comment-reply-title">',
 		'title_reply_after'  => '</h2>',
-		'label_submit' => 'Gửi bình luận',
+		'label_submit' => 'share',
 		'comment_field' => '
         <p>
-            <textarea id="comment" name="comment" rows="5" placeholder="Viết gì đó..."></textarea>
+            <textarea id="comment" name="comment" rows="5" placeholder="What are you thinking..."></textarea>
         </p>',
-		'fields' => array(
+		'fields' => is_user_logged_in() ? array(): array(
 			'author' => '<p><input id="author" name="author" type="text" placeholder="Tên của bạn"></p>',
 			'email'  => '<p><input id="email" name="email" type="email" placeholder="Email"></p>',
 		)
