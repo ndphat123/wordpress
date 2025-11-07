@@ -1400,7 +1400,7 @@ body:not(.enable-search-modal) .header-titles-wrapper {
 }
 
 .site-title a {
-	color: inherit;
+	color: #8383839f !important;
 	display: block;
 	text-decoration: none;
 }
@@ -1412,7 +1412,7 @@ body:not(.enable-search-modal) .header-titles-wrapper {
 
 .site-description {
 	margin-top: 1rem;
-	color: #6d6d6d;
+	color: #000;
 	font-size: 1.8rem;
 	font-weight: 500;
 	display: none;
@@ -1518,7 +1518,7 @@ body:not(.enable-search-modal) .site-logo img {
 }
 
 .toggle-inner .toggle-text {
-	color: #6d6d6d;
+	color: #8383839f !important;
 	font-size: 1rem;
 	font-weight: 600;
 	position: absolute;
@@ -7108,4 +7108,167 @@ footer {
     
     /* Đảm bảo văn bản xuống dòng tự động */
     word-wrap: break-word;
+}
+/* header 8/10 */
+/*----------------------------------------chinh sua header----------------------------------------*/
+.color-header{
+	background: #d5d5d59f !important;
+}
+.header-search-form{
+	margin-left: 20px;
+}
+/* Thiết lập kiểu dáng cho trường nhập liệu (Search) */
+.header-search-form .search-form .search-field {
+	/* Đảm bảo field có viền và nền theo mẫu */
+	background-color: #ffffff; /* Nền trắng */
+	border: 1px solid #ccc; /* Viền xám nhạt */
+	padding: 8px 10px;
+	height: 38px; /* Chiều cao cố định */
+	font-size: 14px;
+	border-radius: 4px; /* Bo góc nhẹ */
+	width: 200px; /* Chiều rộng của ô search */
+}
+
+/* Thiết lập kiểu dáng cho nút Submit */
+.header-search-form .search-form .search-submit {
+	/* Tạo kiểu cho nút Submit */
+	background-color: #f7f7f7; /* Nền xám nhạt */
+	border: 1px solid #ccc;
+	color: #444; /* Màu chữ xám đậm */
+	padding: 8px 15px;
+	height: 38px;
+	font-weight: normal;
+	font-size: 14px;
+	border-radius: 4px;
+	margin-left: 5px; /* Khoảng cách với ô search */
+	cursor: pointer;
+	text-transform: none !important;
+}
+.title-edit{
+	margin-left: 10px;
+	padding: 26px 10px;
+	background-color: #b3afafa1;
+}
+
+/* Custom Account Dropdown Styles */
+/* CONTAINER: Căn chỉnh thẳng hàng với Menu và Search */
+/* CONTAINER: Căn chỉnh thẳng hàng với Menu và Search */
+/* CSS */
+.account-toggle-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/*padding: 0 10px;*/
+	margin-top: 3px;
+
+}
+
+.account-toggle {
+	display: inline-block;
+	text-align: center;
+	text-decoration: none !important;
+	color: #333 !important;
+	cursor: pointer;
+}
+
+.account-icon-wrap {
+	display: flex;
+	flex-direction: column; /* xếp dọc icon và chữ */
+	align-items: center;
+	margin-top: 10px;
+}
+
+.account-toggle svg {
+	width: 30px;
+	height: 28px;
+	fill: #333;
+	margin: 0 auto;
+
+}
+
+.account-toggle .account-text {
+	font-size: 1.5rem;
+	line-height: 1;
+}
+
+
+/* Định vị và ẩn menu sổ xuống */
+.account-dropdown-menu {
+	display: none; /* Mặc định ẩn */
+	position: absolute;
+	top: 100%;
+	right: 0;
+	min-width: 180px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+	z-index: 999;
+	padding: 5px 0;
+}
+
+.account-dropdown-menu a {
+	display: block;
+	padding: 10px 15px;
+	text-decoration: none;
+	color: #333;
+	font-size: 1.5rem;
+	white-space: nowrap;
+}
+
+.account-dropdown-menu a:hover {
+	background-color: #f0f0f0;
+}
+
+/* Hiển thị menu khi có class 'active' */
+.account-icon-dropdown.active .account-dropdown-menu {
+	display: block;
+}
+.account-toggle-wrapper {
+	/* Đảm bảo nó cùng dòng với Search và Menu */
+	display: flex;
+	align-items: center;
+	position: relative;
+
+}
+.header-account{
+	margin-bottom: 20px;
+}
+/*----------------------------------------end----------------------------------------*/
+
+/* 🔹 Chỉnh màu chữ menu header sang đen */
+.primary-menu-wrapper a {
+    color: #8383839f !important;
+    font-weight: 500;
+}
+
+/* 🔹 Khi hover (di chuột vào), cho hiệu ứng nhẹ */
+.primary-menu-wrapper a:hover {
+    color: #0073aa !important; /* hoặc #333 nếu bạn muốn trung tính */
+	text-decoration:none;
+}
+
+.header-titles a,
+.header-titles .site-title {
+    color: #fff !important;
+}
+
+.header-toggles button,
+.header-toggles a {
+    color: #000 !important;
+}
+
+/* 🔹 Chỉnh màu chữ Home và Group P sang đen */
+.header-titles,
+.header-titles a,
+.header-titles .site-title,
+.header-titles .site-description {
+    color: #8383839f !important;
+}
+
+/* 🔹 Nếu có hover vào logo hoặc chữ Group P thì giữ nguyên hoặc đổi nhẹ */
+.header-titles a:hover {
+    color: #0073aa !important; /* xanh nhẹ khi hover, hoặc đổi thành #000 nếu muốn giữ nguyên */
+}
+.account-icon-dropdown>.account-toggle>.account-icon-wrap>.account-text{
+	color: #8383839f !important;
 }
