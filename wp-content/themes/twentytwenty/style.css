@@ -8464,7 +8464,7 @@ hr.styled-separator.is-style-wide {
 /* 17/10/2025 chỉnh phần bài viết gần đây trong trang chi tiết  */
 /* Sidebar Right Container */
 .sidebar-right {
-    background: #fffaf0;
+    background: #4DB6AC; /* Màu nền xanh ngọc */
     padding: 20px 25px;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
