@@ -1,61 +1,50 @@
 <?php
 /**
- * Displays the next and previous post navigation in single posts.
- *
+ * Custom post navigation (vertical date style)
  * @package WordPress
  * @subpackage Twenty_Twenty
- * @since Twenty Twenty 1.0
  */
 
 $next_post = get_next_post();
 $prev_post = get_previous_post();
 
-if ( $next_post || $prev_post ) {
+if ( $next_post || $prev_post ) :
+?>
 
-	$pagination_classes = '';
+<nav class="custom-post-navigation section-inner" aria-label="<?php esc_attr_e( 'Post', 'twentytwenty' ); ?>">
 
-	if ( ! $next_post ) {
-		$pagination_classes = ' only-one only-prev';
-	} elseif ( ! $prev_post ) {
-		$pagination_classes = ' only-one only-next';
-	}
+    <div class="custom-post-nav-list">
 
-	?>
+        <?php if ( $prev_post ) : ?>
+            <div class="nav-item prev-post">
+                <div class="nav-date">
+                    <span class="day"><?php echo get_the_date( 'd', $prev_post->ID ); ?></span>
+                    <span class="divider">—</span>
+                    <span class="month"><?php echo get_the_date( 'm', $prev_post->ID ); ?></span>
+                    <span class="year"><?php echo get_the_date( 'y', $prev_post->ID ); ?></span>
+                </div>
+                <a class="nav-title" href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>">
+                    <?php echo esc_html( get_the_title( $prev_post->ID ) ); ?>
+                </a>
+            </div>
+        <?php endif; ?>
 
-	<nav class="pagination-single section-inner<?php echo esc_attr( $pagination_classes ); ?>" aria-label="<?php esc_attr_e( 'Post', 'twentytwenty' ); ?>">
+        <?php if ( $next_post ) : ?>
+            <div class="nav-item next-post">
+                <div class="nav-date">
+                    <span class="day"><?php echo get_the_date( 'd', $next_post->ID ); ?></span>
+                    <span class="divider">—</span>
+                    <span class="month"><?php echo get_the_date( 'm', $next_post->ID ); ?></span>
+                    <span class="year"><?php echo get_the_date( 'y', $next_post->ID ); ?></span>
+                </div>
+                <a class="nav-title" href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>">
+                    <?php echo esc_html( get_the_title( $next_post->ID ) ); ?>
+                </a>
+            </div>
+        <?php endif; ?>
 
-		<hr class="styled-separator is-style-wide" aria-hidden="true" />
+    </div>
 
-		<div class="pagination-single-inner">
+</nav>
 
-			<?php
-			if ( $prev_post ) {
-				?>
-
-				<a class="previous-post" href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>">
-					<span class="arrow" aria-hidden="true">&larr;</span>
-					<span class="title"><span class="title-inner"><?php echo wp_kses_post( get_the_title( $prev_post->ID ) ); ?></span></span>
-				</a>
-
-				<?php
-			}
-
-			if ( $next_post ) {
-				?>
-
-				<a class="next-post" href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>">
-					<span class="arrow" aria-hidden="true">&rarr;</span>
-						<span class="title"><span class="title-inner"><?php echo wp_kses_post( get_the_title( $next_post->ID ) ); ?></span></span>
-				</a>
-				<?php
-			}
-			?>
-
-		</div><!-- .pagination-single-inner -->
-
-		<hr class="styled-separator is-style-wide" aria-hidden="true" />
-
-	</nav><!-- .pagination-single -->
-
-	<?php
-}
+<?php endif; ?>
