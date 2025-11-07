@@ -104,8 +104,25 @@ get_header();
             }
         } elseif (is_search()) {
         ?>
-            <div class="no-search-results-form section-inner thin">
-                <?php get_search_form(array('aria_label' => __('search again', 'twentytwenty'))); ?>
+            <!-- ✅ Khi không có kết quả tìm kiếm -->
+            <div class="no-search-results">
+                <header class="archive-header">
+                    <div class="archive-header-inner">
+                        <h1 class="archive-title">
+                            <span class="color-accent">Kết quả tìm kiếm:</span>
+                            "<?php echo esc_html(get_search_query()); ?>"
+                        </h1>
+
+                        <!-- Ô tìm kiếm hiển thị cùng hàng -->
+                        <div class="no-search-results-form section-inner thin">
+                            <?php get_search_form(array('aria_label' => __('search again', 'twentytwenty'))); ?>
+                        </div>
+                    </div>
+
+                    <div class="archive-subtitle">
+                        <p>Không tìm thấy kết quả nào phù hợp. Vui lòng thử lại với từ khóa khác.</p>
+                    </div>
+                </header>
             </div>
         <?php
         } else {

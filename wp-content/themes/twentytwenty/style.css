@@ -9054,3 +9054,39 @@ hr.styled-separator.is-style-wide {
   white-space: nowrap;
   margin-left: 10px !important;
 }
+
+.archive-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.no-search-results-form.section-inner.thin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.no-search-results-form.section-inner.thin form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.no-search-results-form.section-inner.thin input.search-field {
+  height: 38px;
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+.no-search-results-form.section-inner.thin input.search-submit {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
