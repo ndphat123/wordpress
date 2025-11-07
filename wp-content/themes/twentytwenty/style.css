@@ -8887,5 +8887,108 @@ hr.styled-separator.is-style-wide {
     color: #666;
     margin-top: 3px;
 }
+/* bình luận  */
+/* ===== Bình luận mới nhất (kiểu giống ảnh 2) ===== */
+/* .tdc-comments-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.comment-item {
+    display: flex;
+    align-items: flex-start;
+    background: #f7f7f7;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+.comment-avatar img {
+    border-radius: 50%;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+}
+.comment-content-box {
+    flex: 1;
+}
+.comment-author-box {
+    background: #dcdcdc;
+    border-radius: 4px;
+    padding: 3px 6px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+.comment-author-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+.comment-text {
+    font-size: 0.9rem;
+    color: #333;
+    background: #fff;
+    border-radius: 4px;
+    padding: 6px;
+} */
+/* ====== Hiển thị phân cấp bình luận trong sidebar ====== */
+.tdc-comments-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.comment-item {
+    display: flex;
+    align-items: flex-start;
+    background: #f7f7f7;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.comment-avatar img {
+    border-radius: 50%;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.comment-content-box {
+    flex: 1;
+}
+
+.comment-author-box {
+    background: #dcdcdc;
+    border-radius: 4px;
+    padding: 3px 6px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.comment-author-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.comment-text {
+    font-size: 0.9rem;
+    color: #333;
+    background: #fff;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+/* ====== Thụt vào cho phản hồi ====== */
+.comment-children {
+    list-style: none;
+    margin-left: 30px;  /* thụt vào bên phải */
+    margin-top: 8px;
+    padding-left: 0;
+}
+
+.comment-children .comment-item {
+    background: #fafafa;
+}
 
  

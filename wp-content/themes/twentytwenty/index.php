@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The main template file
  *
@@ -11,84 +12,86 @@ get_header();
 
 <div id="tdc-homepage-layout">
 
-<?php if ( is_front_page() ) : // ===== CHỈ HIỂN THỊ TRÊN TRANG CHỦ ===== ?>
-    <aside class="tdc-sidebar-left">
-        <h3>Xem nhiều</h3>
-        <div class="tdc-popular-grid">
-            <?php
-            $recent_posts_args = array(
-                'posts_per_page'      => 6,
-                'orderby'             => 'date',
-                'order'               => 'DESC',
-                'ignore_sticky_posts' => true
-            );
+    <?php if (is_front_page()) : // ===== CHỈ HIỂN THỊ TRÊN TRANG CHỦ ===== 
+    ?>
+        <aside class="tdc-sidebar-left">
+            <h3>Xem nhiều</h3>
+            <div class="tdc-popular-grid">
+                <?php
+                $recent_posts_args = array(
+                    'posts_per_page'      => 6,
+                    'orderby'             => 'date',
+                    'order'               => 'DESC',
+                    'ignore_sticky_posts' => true
+                );
 
-            $recent_posts_query = new WP_Query($recent_posts_args);
+                $recent_posts_query = new WP_Query($recent_posts_args);
 
-            if ($recent_posts_query->have_posts()) {
-                $index = 0;
-                while ($recent_posts_query->have_posts()) {
-                    $recent_posts_query->the_post();
-                    $index++;
-                    printf(
-                        '<div class="tdc-popular-grid-item">
+                if ($recent_posts_query->have_posts()) {
+                    $index = 0;
+                    while ($recent_posts_query->have_posts()) {
+                        $recent_posts_query->the_post();
+                        $index++;
+                        printf(
+                            '<div class="tdc-popular-grid-item">
                             <span class="tdc-popular-number">%1$s</span>
                             <a href="%2$s" class="tdc-popular-title">%3$s</a>
                         </div>',
-                        $index,
-                        esc_url(get_permalink()),
-                        esc_html(get_the_title())
-                    );
+                            $index,
+                            esc_url(get_permalink()),
+                            esc_html(get_the_title())
+                        );
+                    }
+                    wp_reset_postdata();
+                } else {
+                    echo '<div class="tdc-popular-grid-item">Không có bài viết gần đây nào.</div>';
                 }
-                wp_reset_postdata();
-            } else {
-                echo '<div class="tdc-popular-grid-item">Không có bài viết gần đây nào.</div>';
-            }
+                ?>
+            </div>
+        </aside>
+    <?php endif; ?>
+
+
+    <?php if (is_search()) : // ===== TRANG TÌM KIẾM ===== 
+    ?>
+        <!-- 🔹 CỘT TRÁI: Bài viết mới nhất -->
+        <aside class="tdc-sidebar-left">
+            <h3>Trang mới nhất</h3>
+            <?php
+            $recent_posts = wp_get_recent_posts(array(
+                'numberposts' => 3,
+                'post_status' => 'publish'
+            ));
+
+            if ($recent_posts) :
+                foreach ($recent_posts as $post) :
+                    $categories = get_the_category($post['ID']);
+                    $category_name = !empty($categories) ? $categories[0]->name : 'Chưa phân loại';
             ?>
-        </div>
-    </aside>
-<?php endif; ?>
-
-
-<?php if ( is_search() ) : // ===== TRANG TÌM KIẾM ===== ?>
-    <!-- 🔹 CỘT TRÁI: Bài viết mới nhất -->
-    <aside class="tdc-sidebar-left">
-        <h3>Trang mới nhất</h3>
-        <?php
-        $recent_posts = wp_get_recent_posts(array(
-            'numberposts' => 3,
-            'post_status' => 'publish'
-        ));
-
-        if ($recent_posts) :
-            foreach ($recent_posts as $post) :
-                $categories = get_the_category($post['ID']);
-                $category_name = !empty($categories) ? $categories[0]->name : 'Chưa phân loại';
-        ?>
-                <div class="latest-post-item">
-                    <h4 class="latest-post-heading">
-                        <a href="<?php echo get_permalink($post['ID']); ?>">
-                            <?php echo wp_trim_words($post['post_title'], 8, '...'); ?>
+                    <div class="latest-post-item">
+                        <h4 class="latest-post-heading">
+                            <a href="<?php echo get_permalink($post['ID']); ?>">
+                                <?php echo wp_trim_words($post['post_title'], 8, '...'); ?>
+                            </a>
+                        </h4>
+                        <a href="<?php echo get_permalink($post['ID']); ?>" class="latest-post-thumbnail">
+                            <?php echo get_the_post_thumbnail($post['ID'], 'medium'); ?>
                         </a>
-                    </h4>
-                    <a href="<?php echo get_permalink($post['ID']); ?>" class="latest-post-thumbnail">
-                        <?php echo get_the_post_thumbnail($post['ID'], 'medium'); ?>
-                    </a>
-                    <p class="latest-post-excerpt">
-                        <?php echo wp_trim_words($post['post_content'], 25, '...'); ?>
-                    </p>
-                    <div class="latest-post-category">
-                        Ngành: <?php echo esc_html($category_name); ?>
+                        <p class="latest-post-excerpt">
+                            <?php echo wp_trim_words($post['post_content'], 25, '...'); ?>
+                        </p>
+                        <div class="latest-post-category">
+                            Ngành: <?php echo esc_html($category_name); ?>
+                        </div>
                     </div>
-                </div>
-        <?php
-            endforeach;
-        else :
-            echo '<p>Không có bài viết mới nào.</p>';
-        endif;
-        ?>
-    </aside>
-<?php endif; ?>
+            <?php
+                endforeach;
+            else :
+                echo '<p>Không có bài viết mới nào.</p>';
+            endif;
+            ?>
+        </aside>
+    <?php endif; ?>
 
 
 
@@ -115,62 +118,96 @@ get_header();
 
 
 
-<?php if ( is_front_page() ) : // ===== CỘT PHẢI TRANG CHỦ ===== ?>
-    <aside class="tdc-sidebar-right">
-        <h3>Comments</h3>
-        <ul class="tdc-comments-list">
-            <?php
-            $comments = get_comments(array(
-                'number'      => 8,
-                'status'      => 'approve',
-                'type'        => 'comment',
-                'post_status' => 'publish'
-            ));
+    <?php if (is_front_page()) : // ===== CỘT PHẢI TRANG CHỦ ===== 
+    ?>
+        <aside class="tdc-sidebar-right">
+            <h3>Comments</h3>
+            <ul class="tdc-comments-list">
+                <?php
+                $comments = get_comments(array(
+                    'number'      => 8,
+                    'status'      => 'approve',
+                    'type'        => 'comment',
+                    'post_status' => 'publish'
+                ));
 
-            if ($comments) {
-                foreach ($comments as $comment) {
-                    printf(
-                        '<li><a href="%s" class="tdc-comment-content">%s</a></li>',
-                        esc_url(get_comment_link($comment)),
-                        esc_html($comment->comment_content)
-                    );
+                if ($comments) {
+                    foreach ($comments as $comment) {
+                        printf(
+                            '<li><a href="%s" class="tdc-comment-content">%s</a></li>',
+                            esc_url(get_comment_link($comment)),
+                            esc_html($comment->comment_content)
+                        );
+                    }
+                } else {
+                    echo '<li>Không có bình luận nào.</li>';
                 }
-            } else {
-                echo '<li>Không có bình luận nào.</li>';
-            }
-            ?>
-        </ul>
-    </aside>
-<?php endif; ?>
+                ?>
+            </ul>
+        </aside>
+    <?php endif; ?>
 
 
-<?php if ( is_search() ) : // ===== CỘT PHẢI TRANG TÌM KIẾM ===== ?>
-    <aside class="tdc-sidebar-right">
-        <h3>Bình luận mới nhất</h3>
-        <ul class="tdc-comments-list">
-            <?php
-            $comments = get_comments(array(
-                'number'      => 5,
-                'status'      => 'approve',
-                'type'        => 'comment',
-            ));
+    <?php if (is_search()) : // ===== CỘT PHẢI TRANG TÌM KIẾM ===== 
+    ?>
+        <aside class="tdc-sidebar-right">
+            <h3>Bình luận mới nhất</h3>
+            <ul class="tdc-comments-list">
+                <?php
+                $comments = get_comments(array(
+                    'number'      => 10,
+                    'status'      => 'approve',
+                    'type'        => 'comment',
+                    'hierarchical' => 'threaded'
+                ));
 
-            if ($comments) :
-                foreach ($comments as $comment) : ?>
-                    <li>
-                        <a href="<?php echo esc_url(get_comment_link($comment)); ?>">
-                            <?php echo esc_html(wp_trim_words($comment->comment_content, 12, '...')); ?>
-                        </a>
-                        <span class="comment-author"><?php echo esc_html($comment->comment_author); ?></span>
-                    </li>
-                <?php endforeach;
-            else :
-                echo '<li>Chưa có bình luận nào.</li>';
-            endif;
-            ?>
-        </ul>
-    </aside>
-<?php endif; ?>
+                if ($comments) :
+                    // Hàm đệ quy hiển thị comment và phản hồi
+                    function tdc_render_comment($comment, $depth = 0)
+                    {
+                ?>
+                        <li class="comment-item depth-<?php echo $depth; ?>">
+                            <div class="comment-avatar">
+                                <?php echo get_avatar($comment->comment_author_email, 40); ?>
+                            </div>
+                            <div class="comment-content-box">
+                                <div class="comment-author-box">
+                                    <span class="comment-author-name"><?php echo esc_html($comment->comment_author); ?></span>
+                                </div>
+                                <div class="comment-text">
+                                    <?php echo esc_html(wp_trim_words($comment->comment_content, 15, '...')); ?>
+                                </div>
+                            </div>
+                        </li>
+                <?php
+                        // Lấy phản hồi con
+                        $child_comments = get_comments(array(
+                            'parent' => $comment->comment_ID,
+                            'status' => 'approve',
+                        ));
+                        if ($child_comments) {
+                            echo '<ul class="comment-children">';
+                            foreach ($child_comments as $child) {
+                                tdc_render_comment($child, $depth + 1);
+                            }
+                            echo '</ul>';
+                        }
+                    }
+
+                    // Lặp bình luận gốc
+                    foreach ($comments as $comment) {
+                        if ($comment->comment_parent == 0) {
+                            tdc_render_comment($comment);
+                        }
+                    }
+                else :
+                    echo '<li>Chưa có bình luận nào.</li>';
+                endif;
+                ?>
+            </ul>
+        </aside>
+    <?php endif; ?>
+
 
 </div>
 
